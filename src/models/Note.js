@@ -9,7 +9,7 @@ const { Schema } = mongoose; // Solo quiero el esquema de mongoose
 
 //Basicamente es la estructura de la base de datos
 const NoteSchema = new Schema({ 
-    tittle: { type: String, required: true},
+    title: { type: String, required: true},
     description: { type: String, required: true},
     date: {type: Date, default: Date.now}
 });

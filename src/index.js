@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars'); // Motor de plantillas para html e
 const methodOverride = require('method-override'); //Permite usar verbos HTTP como PUT o DELETE en lugares donde el cliente no lo admite.
 const session = require('express-session'); //Los datos de la sesión no se guardan en la cookie, solo el ID de la sesión. Los datos de la sesión se almacenan en el servidor.
 
+const flash = require('connect-flash');
 //Initializations
 
 const app = express(); //inicializa express
@@ -28,7 +29,7 @@ app.set ('view engine', '.hbs'); //las vistas se guardan con extensión .hbs
 //Middlewares
 app.use(express.urlencoded({extended: false})); // sirve para cuando un formulario envie datos yo lo entienda
 
-app.use(methodOverride('method')); //sirve para usar otros tipos de metodos ademas del get y post
+app.use(methodOverride('_method')); //sirve para usar otros tipos de metodos ademas del get y post
 
 app.use(session({ //pendiente
     secret: 'aguacate',
@@ -36,8 +37,15 @@ app.use(session({ //pendiente
     saveUninitialized: true
 }))
 
+app.use(flash());
+
 //Global Variables
 
+app.use((req, res, next)=>{
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.errir_msg = req.flash('error_msg');
+    next();
+}),
 
 //Routes
 
