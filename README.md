@@ -33,3 +33,32 @@ npm i express express-handlebars express-session method-override mongoose passpo
 
 npm i nodemon
 ```
+**************************************************************************************
+
+### Información sobre carpetas
+
+- config
+
+- helpers
+- models
+
+Es donde se crean modelos de datos para la base de datos. Esta sera llamada desde los metodos post que quieran almacenar información
+
+- public
+
+Aqui se crean los Static Files o archivos estáticos los cuales no van a ser modificados
+
+- routes
+
+Donde se crean las rutas y se hacen los metodos del protocolo http
+
+- views
+
+Aquí se crea el frontend con subcarpetas como: layouts partials users
+
+
+
+
+**************************************************************************************
+
+Apuntes: ctrl + k + f

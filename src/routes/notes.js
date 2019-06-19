@@ -1,11 +1,13 @@
 const router = require('express').Router();
 
+const Note = require('../models/Note'); //Modelo de base de datos
+
 router.get('/notes/add', (req, res)=>{
     res.render('notes/new-note');
 
 });
 
-router.post('/notes/new-note', (req, res) =>{
+router.post('/notes/new-note', async (req, res) =>{
     const { tittle, description } = req.body;
     const errors= [];
     if(!tittle){
@@ -24,12 +26,15 @@ router.post('/notes/new-note', (req, res) =>{
     } else{
 
         //almacenar en la base de datos
-        res.send('ok');
+        const newNote = new Note({tittle, description});
+        await newNote.save(); //salvar esto en la base de datos es asincrono
+        res.redirect('/notes');
     }
 });
 
-router.get('/notes', (req, res) =>{
-    res.send("Notes from data base");
+router.get('/notes', async (req, res) =>{
+    const notes = await Note.find();
+    res.render('notes/all-notes', {notes});
 }); 
 
 module.exports = router;
